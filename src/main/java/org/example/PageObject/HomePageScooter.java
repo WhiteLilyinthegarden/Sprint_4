@@ -1,4 +1,4 @@
-package org.example.PageObject;
+package org.example.pageObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -264,14 +264,14 @@ public class HomePageScooter {
 
     public OrderScooterPage clickBtnHeaderOrder(WebDriver driver) {
         driver.findElement(btnHeaderOrder).click();
-        return new OrderScooterPage();
+        return new OrderScooterPage(driver);
     }
 
     public OrderScooterPage clickBtnMiddleOrder(WebDriver driver) {
         WebElement element = driver.findElement(btnMiddleOrder);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
         element.click();
-        return new OrderScooterPage();
+        return new OrderScooterPage(driver);
     }
 
 }

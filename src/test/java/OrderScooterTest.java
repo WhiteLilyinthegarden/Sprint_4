@@ -1,37 +1,11 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.PageObject.HomePageScooter;
+import org.example.pageObject.HomePageScooter;
 import org.hamcrest.MatcherAssert;
-import static org.hamcrest.CoreMatchers.containsString;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.concurrent.TimeUnit;
+import static org.hamcrest.CoreMatchers.containsString;
 
 
-public class OrderScooterTest {
-
-    private WebDriver driver;
-
-    @Before
-    public void runBrowserAndURL() {
-
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-
-        //закоментила после проверки, что тесты прошли успешно, так, как в Хроме выходит баг
-        //WebDriverManager.firefoxdriver().setup();
-        //driver = new FirefoxDriver();
-
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get(HomePageScooter.URL);
-        driver.manage().deleteAllCookies();
-
-    }
+public class OrderScooterTest extends BaseTest {
 
     @Test
     public void clickBtnHeaderOrderAndfillInTheSectionForWhomTheScooterAndAboutRent() {
@@ -50,7 +24,7 @@ public class OrderScooterTest {
 
         String expectedResult = "Заказ оформлен";
         HomePageScooter homePageScooter = new HomePageScooter();
-        String actualResult = homePageScooter.clickBtnHeaderOrder(driver).orderScooter(driver, name, surname, address, stationNumber, phone,
+        String actualResult = homePageScooter.clickBtnHeaderOrder(driver).orderScooter(name, surname, address, stationNumber, phone,
                 dayOfArrival, comment, amountOfDays, colorNumber);
         MatcherAssert.assertThat("Заголовок окна успешного оформления заказа не соответвует ожидаемому. Ожидаемый заголовок: Заказ оформлен", actualResult, containsString(expectedResult));
     }
@@ -72,14 +46,9 @@ public class OrderScooterTest {
 
         String expectedResult = "Заказ оформлен";
         HomePageScooter homePageScooter = new HomePageScooter();
-        String actualResult = homePageScooter.clickBtnMiddleOrder(driver).orderScooter(driver, name, surname, address, stationNumber, phone,
+        String actualResult = homePageScooter.clickBtnMiddleOrder(driver).orderScooter(name, surname, address, stationNumber, phone,
                 dayOfArrival, comment, amountOfDays, colorNumber);
         MatcherAssert.assertThat("Заголовок окна успешного оформления заказа не соответвует ожидаемому. Ожидаемый заголовок: Заказ оформлен", actualResult, containsString(expectedResult));
-    }
-
-    @After
-    public void closeTestArea() {
-        driver.quit();
     }
 
 }

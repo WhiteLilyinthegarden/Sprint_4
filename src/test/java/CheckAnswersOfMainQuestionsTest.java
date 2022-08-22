@@ -1,15 +1,11 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.example.PageObject.HomePageScooter;
+import org.example.pageObject.HomePageScooter;
 import org.junit.Assert;
 import org.junit.Before;
-import org.openqa.selenium.WebDriver;
+import org.junit.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import org.junit.Test;
-import org.junit.After;
-
-public class CheckAnswersOfMainQuestionsTest {
-    private WebDriver driver;
+public class CheckAnswersOfMainQuestionsTest extends BaseTest {
 
     @Before
     public void runBrowserAndURL() {
@@ -82,11 +78,6 @@ public class CheckAnswersOfMainQuestionsTest {
         String expectedResult = "Да, обязательно. Всем самокатов! И Москве, и Московской области.";
         String actualResult = homePageScooter.textOfAnswerTheQuestionILeaveBehindTheMKADWillYouBringMe(driver);
         Assert.assertEquals("Текст вопроса №8 не соответствует ожидаемому.", expectedResult, actualResult);
-    }
-
-    @After
-    public void teardown() {
-        driver.quit();
     }
 
     }
